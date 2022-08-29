@@ -14,7 +14,7 @@ func NewTodoItemService(repo repository.TodoItem, listRepo repository.TodoList) 
 	return &TodoItemService{repo: repo, listRepo: listRepo}
 }
 
-func (s *TodoItemService) Create(userId, listId int, list to_do.TodoItem) (int, error) {
+func (s *TodoItemService) Create(userId, listId int, list to_do.CreateTodoItem) (int, error) {
 	_, err := s.listRepo.GetById(userId, listId)
 	if err != nil {
 		return 0, err

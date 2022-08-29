@@ -7,13 +7,26 @@ import (
 	"strconv"
 )
 
+// @Summary create list
+// @Security ApiKeyAuth
+// @Tags list
+// @Description create list
+// @ID create-list
+// @Accept  json
+// @Produce  json
+// @Param input body to_do.CreateListItem true "list info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/lists [post]
 func (h *Handler) createList(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
 		return
 	}
 
-	var input to_do.TodoList
+	var input to_do.CreateListItem
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
@@ -34,6 +47,18 @@ type getAllListsResponse struct {
 	Data []to_do.TodoList `json:"data"`
 }
 
+// @Summary get all lists
+// @Security ApiKeyAuth
+// @Tags list
+// @Description get all lists
+// @ID get-all-lists
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} getAllListsResponse
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/lists [get]
 func (h *Handler) getAllLists(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -51,6 +76,19 @@ func (h *Handler) getAllLists(c *gin.Context) {
 	})
 }
 
+// @Summary get list
+// @Security ApiKeyAuth
+// @Tags list
+// @Description get list by id
+// @ID get-list
+// @Accept  json
+// @Produce  json
+// @Param id path int true "list id"
+// @Success 200 {object} to_do.TodoList
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/lists/{id} [get]
 func (h *Handler) getListsById(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -72,6 +110,20 @@ func (h *Handler) getListsById(c *gin.Context) {
 	c.JSON(http.StatusOK, list)
 }
 
+// @Summary update list
+// @Security ApiKeyAuth
+// @Tags list
+// @Description update list by id
+// @ID update-list
+// @Accept  json
+// @Produce  json
+// @Param input body to_do.CreateListItem true "new list info"
+// @Param id path int true "list id"
+// @Success 200 {object} statusResponse
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/lists/{id} [put]
 func (h *Handler) updateList(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -100,6 +152,19 @@ func (h *Handler) updateList(c *gin.Context) {
 	})
 }
 
+// @Summary delete list
+// @Security ApiKeyAuth
+// @Tags list
+// @Description delete list by id
+// @ID delete-list
+// @Accept  json
+// @Produce  json
+// @Param id path int true "list id"
+// @Success 200 {object} statusResponse
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/lists/{id} [delete]
 func (h *Handler) deleteList(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {

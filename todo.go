@@ -8,6 +8,11 @@ type TodoList struct {
 	Description string `json:"description" db:"description"`
 }
 
+type CreateListItem struct {
+	Title       string `json:"title" db:"title" binding:"required"`
+	Description string `json:"description" db:"description"`
+}
+
 type UserList struct {
 	Id     int
 	UserId int
@@ -16,6 +21,12 @@ type UserList struct {
 
 type TodoItem struct {
 	Id          int    `json:"id"`
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Done        bool   `json:"done"`
+}
+
+type CreateTodoItem struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Done        bool   `json:"done"`

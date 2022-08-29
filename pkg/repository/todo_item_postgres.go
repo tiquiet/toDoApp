@@ -16,7 +16,7 @@ func NewTodoItemPostgres(db *sqlx.DB) *TodoItemPostgres {
 	return &TodoItemPostgres{db: db}
 }
 
-func (r *TodoItemPostgres) Create(listId int, item to_do.TodoItem) (int, error) {
+func (r *TodoItemPostgres) Create(listId int, item to_do.CreateTodoItem) (int, error) {
 	tx, err := r.db.Begin()
 	if err != nil {
 		return 0, err
