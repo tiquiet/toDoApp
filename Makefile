@@ -11,3 +11,5 @@ migrate:
 
 swag:
 	swag init -g cmd/main.go
+
+.DEFAULT_GOAL := run
