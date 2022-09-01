@@ -5,13 +5,13 @@ import (
 	"github.com/tiquiet/to-do/pkg/repository"
 )
 
-type Authorization interface {
+type AuthorizationServiceStruct interface {
 	CreateUser(user to_do.User) (int, error)
 	GenerateToken(username, password string) (string, error)
 	ParseToken(token string) (int, error)
 }
 
-type TodoList interface {
+type TodoListServiceStruct interface {
 	Create(userId int, list to_do.CreateListItem) (int, error)
 	GetAll(userId int) ([]to_do.TodoList, error)
 	GetById(userId, listId int) (to_do.TodoList, error)
@@ -19,7 +19,7 @@ type TodoList interface {
 	Update(userId, listId int, input to_do.UpdateListInput) error
 }
 
-type TodoItem interface {
+type TodoItemServiceStruct interface {
 	Create(userId, listId int, item to_do.CreateTodoItem) (int, error)
 	GetAll(userId, listId int) ([]to_do.TodoItem, error)
 	GetItemById(userId, itemId int) (to_do.TodoItem, error)
@@ -28,15 +28,15 @@ type TodoItem interface {
 }
 
 type Service struct {
-	Authorization
-	TodoList
-	TodoItem
+	AuthorizationServiceStruct
+	TodoListServiceStruct
+	TodoItemServiceStruct
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Authorization: NewAuthService(repos.Authorization),
-		TodoList:      NewTodoListService(repos.TodoList),
-		TodoItem:      NewTodoItemService(repos.TodoItem, repos.TodoList),
+		AuthorizationServiceStruct: NewAuthService(repos.AuthorizationRep),
+		TodoListServiceStruct:      NewTodoListService(repos.TodoListRep),
+		TodoItemServiceStruct:      NewTodoItemService(repos.TodoItemRep, repos.TodoListRep),
 	}
 }

@@ -48,7 +48,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/to_do.TodoItem"
+                            "$ref": "#/definitions/to_do.TodoItemServiceStruct"
                         }
                     },
                     "400": {
@@ -363,7 +363,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/to_do.TodoList"
+                            "$ref": "#/definitions/to_do.TodoListServiceStruct"
                         }
                     },
                     "400": {
@@ -787,7 +787,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/to_do.TodoItem"
+                        "$ref": "#/definitions/to_do.TodoItemServiceStruct"
                     }
                 }
             }
@@ -798,7 +798,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/to_do.TodoList"
+                        "$ref": "#/definitions/to_do.TodoListServiceStruct"
                     }
                 }
             }
@@ -854,7 +854,7 @@ const docTemplate = `{
                 }
             }
         },
-        "to_do.TodoItem": {
+        "to_do.TodoItemServiceStruct": {
             "type": "object",
             "properties": {
                 "description": {
@@ -871,7 +871,7 @@ const docTemplate = `{
                 }
             }
         },
-        "to_do.TodoList": {
+        "to_do.TodoListServiceStruct": {
             "type": "object",
             "required": [
                 "title"
@@ -911,7 +911,7 @@ const docTemplate = `{
     "securityDefinitions": {
         "ApiKeyAuth": {
             "type": "apiKey",
-            "name": "Authorization",
+            "name": "AuthorizationServiceStruct",
             "in": "header"
         }
     }
@@ -924,7 +924,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Todo App API",
-	Description:      "API Server for TodoList Application",
+	Description:      "API Server for TodoListServiceStruct Application",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }

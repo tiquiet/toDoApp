@@ -22,10 +22,10 @@ type tokenClaims struct {
 }
 
 type AuthService struct {
-	repo repository.Authorization
+	repo repository.AuthorizationRep
 }
 
-func NewAuthService(repo repository.Authorization) *AuthService {
+func NewAuthService(repo repository.AuthorizationRep) *AuthService {
 	return &AuthService{repo: repo}
 }
 
